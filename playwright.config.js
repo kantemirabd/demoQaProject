@@ -1,14 +1,21 @@
-// playwright.config.js
 import { defineConfig } from '@playwright/test';
 
 export default defineConfig({
   testDir: './tests',
-  timeout: 30 * 1000,
+  timeout: 30_000,
   retries: 0,
+  reporter: [
+  ['list'],
+  ['allure-playwright'],
+  ],
   use: {
-    headless: true,
-    baseURL: 'https://example.com', // заменим позже на твой URL
+    headless: false,
+    baseURL: 'https://demoqa.com',
+    trace: 'on',
     screenshot: 'only-on-failure',
     video: 'retain-on-failure',
+    launchOptions: {
+      slowMo: 300,
+    },
   },
 });

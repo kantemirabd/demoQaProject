@@ -1,12 +1,22 @@
 {
   "name": "playwright-pom-tests",
   "version": "1.0.0",
+  "type": "module",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "npx playwright test",
+    "test:report": "npx playwright test && npm run allure:generate && npm run allure:open",
+    "allure:generate": "allure generate ./allure-results --clean -o ./allure-report",
+    "allure:open": "allure open ./allure-report",
+    "allure:serve": "allure serve ./allure-results"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": ""
+  "description": "Playwright POM tests with Allure reporting",
+  "devDependencies": {
+    "@playwright/test": "^1.53.1",
+    "allure-playwright": "^3.3.0",
+    "allure-js-commons": "^2.0.0"
+  }
 }

@@ -1,0 +1,15 @@
+# Allure report folders
+allure-report/
+allure-results/
+
+# Playwright artifacts
+test-results/
+*.zip
+*.webm
+*.png
+
+# Node modules
+node_modules/
+
+# VSCode
+.vscode/
