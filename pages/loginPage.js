@@ -11,6 +11,7 @@ export class LoginPage {
     this.passwordInput = page.locator('#password');
     this.loginButton = page.locator('#login');
     this.userNameText = page.locator('#userName-value');
+    this.errorMsg = page.locator('.mb-1')
   }
 
   async goto() {
@@ -31,6 +32,12 @@ export class LoginPage {
     await step(`Проверка входа под пользователем: ${username}`, async () => {
       await this.userNameText.waitFor();
       await expect(this.userNameText).toHaveText(username);
+    });
+  }
+
+  async expectErrorMsg(){
+    await step(`Проверка ошибки входа под пользователем`, async () => {
+      await expect(this.errorMsg).toBeVisible();
     });
   }
 }

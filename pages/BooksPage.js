@@ -42,4 +42,10 @@ export class BooksPage {
       await expect(this.presentBookTitles).toHaveCount(expectedCount);
     });
   }
+  
+  async clickBookByTitle(title) {
+    await step(`Клик по книге с заголовком: ${title}`, async () => {
+      await this.page.locator(`a:has-text("${title}")`).click();
+    });
+  }
 }
