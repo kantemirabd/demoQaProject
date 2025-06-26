@@ -1,5 +1,4 @@
-import { expect } from '@playwright/test';
-import { step } from 'allure-js-commons';
+import { expect, test } from '@playwright/test';
 
 export class BooksPage {
   /**
@@ -13,38 +12,38 @@ export class BooksPage {
   }
 
   async goto() {
-    await step('Переход на страницу книг', async () => {
+    await test.step('Открываем страницу /books', async () => {
       await this.page.goto('/books');
     });
   }
 
   async searchBook(title) {
-    await step(`Поиск книги с названием: ${title}`, async () => {
+    await test.step(`Ищем книгу по названию: "${title}"`, async () => {
       await this.searchBox.fill(title);
     });
   }
 
   async expectOnlyOneBookWithTitle(title) {
-    await step(`Ожидание одной книги с названием: ${title}`, async () => {
+    await test.step(`Проверяем, что отображается только одна книга с названием: "${title}"`, async () => {
       await expect(this.presentBookTitles).toHaveCount(1, { timeout: 10000 });
       await expect(this.page.locator(`a:has-text("${title}")`)).toContainText(title);
     });
   }
 
   async changeRowsPerPage(count) {
-    await step(`Выбор количества строк на странице: ${count}`, async () => {
+    await test.step(`Изменяем количество строк на странице на: ${count}`, async () => {
       await this.rowsDropdown.selectOption(String(count));
     });
   }
 
   async expectBookCount(expectedCount) {
-    await step(`Проверка, что отображено ${expectedCount} книг`, async () => {
+    await test.step(`Ожидаем, что количество отображаемых книг: ${expectedCount}`, async () => {
       await expect(this.presentBookTitles).toHaveCount(expectedCount);
     });
   }
-  
+
   async clickBookByTitle(title) {
-    await step(`Клик по книге с заголовком: ${title}`, async () => {
+    await test.step(`Кликаем по книге с названием: "${title}"`, async () => {
       await this.page.locator(`a:has-text("${title}")`).click();
     });
   }

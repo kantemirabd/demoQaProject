@@ -1,5 +1,4 @@
-import { expect } from '@playwright/test';
-import { step } from 'allure-js-commons';
+import { expect, test } from '@playwright/test';
 
 export class LoginPage {
   /**
@@ -11,17 +10,17 @@ export class LoginPage {
     this.passwordInput = page.locator('#password');
     this.loginButton = page.locator('#login');
     this.userNameText = page.locator('#userName-value');
-    this.errorMsg = page.locator('.mb-1')
+    this.errorMsg = page.locator('.mb-1');
   }
 
   async goto() {
-    await step('Переход на страницу логина', async () => {
+    await test.step('Открываем страницу логина', async () => {
       await this.page.goto('/login');
     });
   }
 
   async login(username, password) {
-    await step(`Ввод логина: ${username} и пароля`, async () => {
+    await test.step(`Выполняем вход: username="${username}"`, async () => {
       await this.userNameInput.fill(username);
       await this.passwordInput.fill(password);
       await this.loginButton.click();
@@ -29,14 +28,14 @@ export class LoginPage {
   }
 
   async expectLoggedIn(username) {
-    await step(`Проверка входа под пользователем: ${username}`, async () => {
+    await test.step(`Проверяем, что пользователь "${username}" успешно вошел`, async () => {
       await this.userNameText.waitFor();
       await expect(this.userNameText).toHaveText(username);
     });
   }
 
-  async expectErrorMsg(){
-    await step(`Проверка ошибки входа под пользователем`, async () => {
+  async expectErrorMsg() {
+    await test.step('Проверяем, что отображается сообщение об ошибке входа', async () => {
       await expect(this.errorMsg).toBeVisible();
     });
   }
