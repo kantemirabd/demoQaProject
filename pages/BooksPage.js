@@ -7,7 +7,7 @@ export class BooksPage {
   constructor(page) {
     this.page = page;
     this.searchBox = page.locator('#searchBox');
-    this.presentBookTitles = page.locator('.action-buttons .mr-2');
+    this.presentBookTitles = page.locator('.action-buttons .mr-2 a');
     this.rowsDropdown = page.locator('select[aria-label="rows per page"]');
   }
 
@@ -45,6 +45,12 @@ export class BooksPage {
   async clickBookByTitle(title) {
     await test.step(`Кликаем по книге с названием: "${title}"`, async () => {
       await this.page.locator(`a:has-text("${title}")`).click();
+    });
+  }
+
+  async clearSearch() {
+    await test.step(`Очищаем строку поиска:`, async () => {
+      await this.searchBox.clear();
     });
   }
 }

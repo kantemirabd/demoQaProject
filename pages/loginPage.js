@@ -36,7 +36,7 @@ export class LoginPage {
 
   async expectErrorMsg() {
     await test.step('Проверяем, что отображается сообщение об ошибке входа', async () => {
-      await expect(this.errorMsg).toBeVisible();
+      await expect(this.errorMsg).toHaveText('Invalid username or password!',{ timeout: 10000 });
     });
   }
 }

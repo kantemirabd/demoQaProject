@@ -22,7 +22,7 @@ test.describe('Books tests', () => {
     await booksPage.expectOnlyOneBookWithTitle('Speaking JavaScript');
 
     // Проверить пагинацию
-    await booksPage.goto();
+    await booksPage.clearSearch()
     await booksPage.changeRowsPerPage(5);
     await booksPage.expectBookCount(5);
   });

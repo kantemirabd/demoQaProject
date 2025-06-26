@@ -14,6 +14,7 @@ test.describe('Login tests', () => {
     await loginPage.goto();
     await loginPage.login(user.userName, user.password);
     await loginPage.expectLoggedIn(user.userName);
+    await expect(page).toHaveURL(/.*profile/);
   });
 
   test('[@logintests] Невалидный логин: неправильный пароль', async ({ page }) => {
